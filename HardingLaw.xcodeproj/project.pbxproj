@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0CA458E25589CF45573CD1A6 /* Pods_HardingLaw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FF42553147017757177C12 /* Pods_HardingLaw.framework */; };
+		9746A91B1E5F44C50013D856 /* AttoneyLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9746A91A1E5F44C50013D856 /* AttoneyLocationViewController.swift */; };
 		974703F41E5DD592004AA051 /* Phil-and-Jeff.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 974703F31E5DD592004AA051 /* Phil-and-Jeff.jpg */; };
 		974703F91E5DDA9D004AA051 /* btn_call_attorney.png in Resources */ = {isa = PBXBuildFile; fileRef = 974703F51E5DDA9D004AA051 /* btn_call_attorney.png */; };
 		974703FA1E5DDA9D004AA051 /* btn_chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 974703F61E5DDA9D004AA051 /* btn_chat.png */; };
@@ -74,6 +76,9 @@
 		97BB53CC1E5DC3EC00600E22 /* verdicts.html in Resources */ = {isa = PBXBuildFile; fileRef = 97BB53CB1E5DC3EC00600E22 /* verdicts.html */; };
 		97BB53CE1E5DC61100600E22 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BB53CD1E5DC61100600E22 /* AboutUsViewController.swift */; };
 		97BB53D01E5DCD1C00600E22 /* aboutus.html in Resources */ = {isa = PBXBuildFile; fileRef = 97BB53CF1E5DCD1C00600E22 /* aboutus.html */; };
+		97CB3FB21E5F19B300EF1029 /* ContactUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB3FB11E5F19B300EF1029 /* ContactUs.swift */; };
+		97CB3FB51E5F2D8F00EF1029 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97CB3FB41E5F2D8F00EF1029 /* MessageUI.framework */; };
+		97CB3FB71E5F2DA900EF1029 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97CB3FB61E5F2DA900EF1029 /* Messages.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +99,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		74FF42553147017757177C12 /* Pods_HardingLaw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HardingLaw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		776A4A0FA55D9C29B6724A99 /* Pods-HardingLaw.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HardingLaw.release.xcconfig"; path = "Pods/Target Support Files/Pods-HardingLaw/Pods-HardingLaw.release.xcconfig"; sourceTree = "<group>"; };
+		84D304CE3BC00A289B97A175 /* Pods-HardingLaw.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HardingLaw.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HardingLaw/Pods-HardingLaw.debug.xcconfig"; sourceTree = "<group>"; };
+		9746A91A1E5F44C50013D856 /* AttoneyLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttoneyLocationViewController.swift; sourceTree = "<group>"; };
 		974703F31E5DD592004AA051 /* Phil-and-Jeff.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Phil-and-Jeff.jpg"; sourceTree = "<group>"; };
 		974703F51E5DDA9D004AA051 /* btn_call_attorney.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_call_attorney.png; sourceTree = "<group>"; };
 		974703F61E5DDA9D004AA051 /* btn_chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_chat.png; sourceTree = "<group>"; };
@@ -167,6 +176,9 @@
 		97BB53CB1E5DC3EC00600E22 /* verdicts.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = verdicts.html; sourceTree = "<group>"; };
 		97BB53CD1E5DC61100600E22 /* AboutUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		97BB53CF1E5DCD1C00600E22 /* aboutus.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = aboutus.html; sourceTree = "<group>"; };
+		97CB3FB11E5F19B300EF1029 /* ContactUs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUs.swift; sourceTree = "<group>"; };
+		97CB3FB41E5F2D8F00EF1029 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		97CB3FB61E5F2DA900EF1029 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +186,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97CB3FB71E5F2DA900EF1029 /* Messages.framework in Frameworks */,
+				97CB3FB51E5F2D8F00EF1029 /* MessageUI.framework in Frameworks */,
+				0CA458E25589CF45573CD1A6 /* Pods_HardingLaw.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +216,8 @@
 				978A19951E59E878005AF43C /* HardingLawTests */,
 				978A19A01E59E878005AF43C /* HardingLawUITests */,
 				978A197D1E59E877005AF43C /* Products */,
+				97CB3FB31E5F2D8F00EF1029 /* Frameworks */,
+				AC87DE42C691ECFD0FACFBFC /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -220,12 +237,14 @@
 				978A19B31E59FFDA005AF43C /* Resource */,
 				978A197F1E59E877005AF43C /* AppDelegate.swift */,
 				978A19811E59E877005AF43C /* HomeViewController.swift */,
+				97CB3FB11E5F19B300EF1029 /* ContactUs.swift */,
 				978A19831E59E877005AF43C /* VerdictsViewController.swift */,
 				97BB53CD1E5DC61100600E22 /* AboutUsViewController.swift */,
 				97BB53A01E5BD37900600E22 /* HowToUseAppViewController.swift */,
 				9747040B1E5E197F004AA051 /* NewInjuryViewController.swift */,
 				9747040D1E5E1A2B004AA051 /* EmergencyServiceViewController.swift */,
 				974704111E5E2112004AA051 /* ShareViewController.swift */,
+				9746A91A1E5F44C50013D856 /* AttoneyLocationViewController.swift */,
 				978A19881E59E877005AF43C /* Assets.xcassets */,
 				97BB53AC1E5C7F6C00600E22 /* Main.storyboard */,
 				978A198A1E59E878005AF43C /* LaunchScreen.storyboard */,
@@ -321,6 +340,25 @@
 			path = image;
 			sourceTree = "<group>";
 		};
+		97CB3FB31E5F2D8F00EF1029 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				97CB3FB61E5F2DA900EF1029 /* Messages.framework */,
+				97CB3FB41E5F2D8F00EF1029 /* MessageUI.framework */,
+				74FF42553147017757177C12 /* Pods_HardingLaw.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AC87DE42C691ECFD0FACFBFC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				84D304CE3BC00A289B97A175 /* Pods-HardingLaw.debug.xcconfig */,
+				776A4A0FA55D9C29B6724A99 /* Pods-HardingLaw.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -328,9 +366,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 978A19A61E59E878005AF43C /* Build configuration list for PBXNativeTarget "HardingLaw" */;
 			buildPhases = (
+				29BA9AF60EED352DA1DC444B /* [CP] Check Pods Manifest.lock */,
 				978A19781E59E877005AF43C /* Sources */,
 				978A19791E59E877005AF43C /* Frameworks */,
 				978A197A1E59E877005AF43C /* Resources */,
+				EDCDBB8239A18F05577EEF77 /* [CP] Embed Pods Frameworks */,
+				CDB053DF362EF05E241F9AC3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -389,7 +430,7 @@
 				TargetAttributes = {
 					978A197B1E59E877005AF43C = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = UC57A9U55X;
+						DevelopmentTeam = Q45EDYR9DX;
 						ProvisioningStyle = Automatic;
 					};
 					978A19911E59E878005AF43C = {
@@ -505,6 +546,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		29BA9AF60EED352DA1DC444B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CDB053DF362EF05E241F9AC3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HardingLaw/Pods-HardingLaw-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EDCDBB8239A18F05577EEF77 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HardingLaw/Pods-HardingLaw-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		978A19781E59E877005AF43C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -515,9 +604,11 @@
 				978A19841E59E877005AF43C /* VerdictsViewController.swift in Sources */,
 				978A19801E59E877005AF43C /* AppDelegate.swift in Sources */,
 				978A19821E59E877005AF43C /* HomeViewController.swift in Sources */,
+				9746A91B1E5F44C50013D856 /* AttoneyLocationViewController.swift in Sources */,
 				9747040E1E5E1A2B004AA051 /* EmergencyServiceViewController.swift in Sources */,
 				974704121E5E2112004AA051 /* ShareViewController.swift in Sources */,
 				97BB53A11E5BD37900600E22 /* HowToUseAppViewController.swift in Sources */,
+				97CB3FB21E5F19B300EF1029 /* ContactUs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -668,9 +759,10 @@
 		};
 		978A19A71E59E878005AF43C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 84D304CE3BC00A289B97A175 /* Pods-HardingLaw.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = UC57A9U55X;
+				DEVELOPMENT_TEAM = Q45EDYR9DX;
 				INFOPLIST_FILE = HardingLaw/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dcmmoguls.HardingLaw;
@@ -681,9 +773,10 @@
 		};
 		978A19A81E59E878005AF43C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 776A4A0FA55D9C29B6724A99 /* Pods-HardingLaw.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = UC57A9U55X;
+				DEVELOPMENT_TEAM = Q45EDYR9DX;
 				INFOPLIST_FILE = HardingLaw/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dcmmoguls.HardingLaw;
