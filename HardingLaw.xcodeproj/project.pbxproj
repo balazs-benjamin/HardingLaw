@@ -15,6 +15,18 @@
 		978A198C1E59E878005AF43C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 978A198A1E59E878005AF43C /* LaunchScreen.storyboard */; };
 		978A19971E59E878005AF43C /* HardingLawTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978A19961E59E878005AF43C /* HardingLawTests.swift */; };
 		978A19A21E59E878005AF43C /* HardingLawUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978A19A11E59E878005AF43C /* HardingLawUITests.swift */; };
+		978A19B91E59FFDA005AF43C /* splash1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 978A19B51E59FFDA005AF43C /* splash1136.png */; };
+		978A19BA1E59FFDA005AF43C /* splash1136@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 978A19B61E59FFDA005AF43C /* splash1136@2x.png */; };
+		978A19BB1E59FFDA005AF43C /* splash480.png in Resources */ = {isa = PBXBuildFile; fileRef = 978A19B71E59FFDA005AF43C /* splash480.png */; };
+		978A19BC1E59FFDA005AF43C /* splash640.png in Resources */ = {isa = PBXBuildFile; fileRef = 978A19B81E59FFDA005AF43C /* splash640.png */; };
+		978A19CD1E5A03C8005AF43C /* icn_about_us.png in Resources */ = {isa = PBXBuildFile; fileRef = 978A19C51E5A03C8005AF43C /* icn_about_us.png */; };
+		978A19CE1E5A03C8005AF43C /* icn_about_us@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 978A19C61E5A03C8005AF43C /* icn_about_us@2x.png */; };
+		978A19CF1E5A03C8005AF43C /* icn_contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 978A19C71E5A03C8005AF43C /* icn_contacts.png */; };
+		978A19D01E5A03C8005AF43C /* icn_contacts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 978A19C81E5A03C8005AF43C /* icn_contacts@2x.png */; };
+		978A19D11E5A03C8005AF43C /* icn_home.png in Resources */ = {isa = PBXBuildFile; fileRef = 978A19C91E5A03C8005AF43C /* icn_home.png */; };
+		978A19D21E5A03C8005AF43C /* icn_home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 978A19CA1E5A03C8005AF43C /* icn_home@2x.png */; };
+		978A19D31E5A03C8005AF43C /* icn_media.png in Resources */ = {isa = PBXBuildFile; fileRef = 978A19CB1E5A03C8005AF43C /* icn_media.png */; };
+		978A19D41E5A03C8005AF43C /* icn_media@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 978A19CC1E5A03C8005AF43C /* icn_media@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +61,18 @@
 		978A199D1E59E878005AF43C /* HardingLawUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HardingLawUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		978A19A11E59E878005AF43C /* HardingLawUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardingLawUITests.swift; sourceTree = "<group>"; };
 		978A19A31E59E878005AF43C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		978A19B51E59FFDA005AF43C /* splash1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash1136.png; sourceTree = "<group>"; };
+		978A19B61E59FFDA005AF43C /* splash1136@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash1136@2x.png"; sourceTree = "<group>"; };
+		978A19B71E59FFDA005AF43C /* splash480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash480.png; sourceTree = "<group>"; };
+		978A19B81E59FFDA005AF43C /* splash640.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash640.png; sourceTree = "<group>"; };
+		978A19C51E5A03C8005AF43C /* icn_about_us.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_about_us.png; sourceTree = "<group>"; };
+		978A19C61E5A03C8005AF43C /* icn_about_us@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_about_us@2x.png"; sourceTree = "<group>"; };
+		978A19C71E5A03C8005AF43C /* icn_contacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_contacts.png; sourceTree = "<group>"; };
+		978A19C81E5A03C8005AF43C /* icn_contacts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_contacts@2x.png"; sourceTree = "<group>"; };
+		978A19C91E5A03C8005AF43C /* icn_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_home.png; sourceTree = "<group>"; };
+		978A19CA1E5A03C8005AF43C /* icn_home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_home@2x.png"; sourceTree = "<group>"; };
+		978A19CB1E5A03C8005AF43C /* icn_media.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_media.png; sourceTree = "<group>"; };
+		978A19CC1E5A03C8005AF43C /* icn_media@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_media@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +123,7 @@
 		978A197E1E59E877005AF43C /* HardingLaw */ = {
 			isa = PBXGroup;
 			children = (
+				978A19B31E59FFDA005AF43C /* Resource */,
 				978A197F1E59E877005AF43C /* AppDelegate.swift */,
 				978A19811E59E877005AF43C /* FirstViewController.swift */,
 				978A19831E59E877005AF43C /* SecondViewController.swift */,
@@ -126,6 +151,33 @@
 				978A19A31E59E878005AF43C /* Info.plist */,
 			);
 			path = HardingLawUITests;
+			sourceTree = "<group>";
+		};
+		978A19B31E59FFDA005AF43C /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				978A19B41E59FFDA005AF43C /* image */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		978A19B41E59FFDA005AF43C /* image */ = {
+			isa = PBXGroup;
+			children = (
+				978A19C51E5A03C8005AF43C /* icn_about_us.png */,
+				978A19C61E5A03C8005AF43C /* icn_about_us@2x.png */,
+				978A19C71E5A03C8005AF43C /* icn_contacts.png */,
+				978A19C81E5A03C8005AF43C /* icn_contacts@2x.png */,
+				978A19C91E5A03C8005AF43C /* icn_home.png */,
+				978A19CA1E5A03C8005AF43C /* icn_home@2x.png */,
+				978A19CB1E5A03C8005AF43C /* icn_media.png */,
+				978A19CC1E5A03C8005AF43C /* icn_media@2x.png */,
+				978A19B51E59FFDA005AF43C /* splash1136.png */,
+				978A19B61E59FFDA005AF43C /* splash1136@2x.png */,
+				978A19B71E59FFDA005AF43C /* splash480.png */,
+				978A19B81E59FFDA005AF43C /* splash640.png */,
+			);
+			path = image;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,9 +287,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				978A19CE1E5A03C8005AF43C /* icn_about_us@2x.png in Resources */,
+				978A19D11E5A03C8005AF43C /* icn_home.png in Resources */,
+				978A19D41E5A03C8005AF43C /* icn_media@2x.png in Resources */,
 				978A198C1E59E878005AF43C /* LaunchScreen.storyboard in Resources */,
+				978A19BB1E59FFDA005AF43C /* splash480.png in Resources */,
+				978A19BA1E59FFDA005AF43C /* splash1136@2x.png in Resources */,
+				978A19D31E5A03C8005AF43C /* icn_media.png in Resources */,
 				978A19891E59E877005AF43C /* Assets.xcassets in Resources */,
+				978A19BC1E59FFDA005AF43C /* splash640.png in Resources */,
 				978A19871E59E877005AF43C /* Main.storyboard in Resources */,
+				978A19CD1E5A03C8005AF43C /* icn_about_us.png in Resources */,
+				978A19D21E5A03C8005AF43C /* icn_home@2x.png in Resources */,
+				978A19B91E59FFDA005AF43C /* splash1136.png in Resources */,
+				978A19CF1E5A03C8005AF43C /* icn_contacts.png in Resources */,
+				978A19D01E5A03C8005AF43C /* icn_contacts@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,6 +573,7 @@
 				978A19A81E59E878005AF43C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		978A19A91E59E878005AF43C /* Build configuration list for PBXNativeTarget "HardingLawTests" */ = {
 			isa = XCConfigurationList;
@@ -517,6 +582,7 @@
 				978A19AB1E59E878005AF43C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		978A19AC1E59E878005AF43C /* Build configuration list for PBXNativeTarget "HardingLawUITests" */ = {
 			isa = XCConfigurationList;
@@ -525,6 +591,7 @@
 				978A19AE1E59E878005AF43C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
