@@ -13,15 +13,19 @@ import UIKit
 
 import GoogleMaps
 import CoreLocation
+import Alamofire
+import GooglePlacePicker
 
 
-
-class AttorneyLocationViewController: UIViewController, CLLocationManagerDelegate {
+class LocationPickerViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet var mapView:GMSMapView!
     var locationManager = CLLocationManager()
-    let lat = 39.746478
-    let long = -104.991775
+    var lat = 39.746478
+    var long = -104.991775
+    var bFirstLoad = true
+    
+    var bounds = GMSCoordinateBounds()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,26 +40,41 @@ class AttorneyLocationViewController: UIViewController, CLLocationManagerDelegat
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
         
-        
-        
-        let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 17.0)
-        mapView.camera = camera
-        mapView.isMyLocationEnabled = true
-        // Creates a marker in the center of the map.
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
-        marker.title = "730 17th Street Suite #650 "
-        marker.snippet = "Denver, CO 80202"
-        marker.map = mapView
-        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation:CLLocation = locations[0]
-        let long = userLocation.coordinate.longitude;
-        let lat = userLocation.coordinate.latitude;
+        long = userLocation.coordinate.longitude;
+        lat = userLocation.coordinate.latitude;
         
-        print(long, lat)
+        if !bFirstLoad{
+            return
+        }
+        bFirstLoad = false
+        
+        let config : GMSPlacePickerConfig = GMSPlacePickerConfig(viewport:nil)
+        let placePicker : GMSPlacePicker = GMSPlacePicker(config: config)
+        
+        placePicker.pickPlace(){
+            (gmsPlace, error) -> Void in
+            if let error = error{
+                print("error:\(error)")
+            }else{
+                if let gmsPlace = gmsPlace{
+                    if let formattedAddress = gmsPlace.formattedAddress{
+                        print("formattedAddress:\r\(formattedAddress)")
+                    }else{
+                        print("gmsPlace.formattedAddress is nil")
+                    }
+                    
+                }else{
+                    print("gmsPlace is nil")
+                }
+                
+                print("info")
+            }
+        }
+
         
         //Do What ever you want with it
     }
@@ -77,5 +96,8 @@ class AttorneyLocationViewController: UIViewController, CLLocationManagerDelegat
     @IBAction func back() {
         _ = navigationController?.popViewController(animated: true)
     }
-        
+    
+    @IBAction func buttonPlacesPicker_TouchUpInside(sender: AnyObject) {
+    }
+    
 }
