@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		0CA458E25589CF45573CD1A6 /* Pods_HardingLaw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FF42553147017757177C12 /* Pods_HardingLaw.framework */; };
+		972B84F31E6D960A00E5FC46 /* icn_message.png in Resources */ = {isa = PBXBuildFile; fileRef = 972B84F21E6D960A00E5FC46 /* icn_message.png */; };
+		972F60191E6D03AB007BC8EF /* ChannelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F60181E6D03AB007BC8EF /* ChannelListViewController.swift */; };
+		972F601B1E6D047C007BC8EF /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F601A1E6D047C007BC8EF /* Channel.swift */; };
+		972F601D1E6D0543007BC8EF /* CreateChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F601C1E6D0543007BC8EF /* CreateChannelCell.swift */; };
+		972F601F1E6D0611007BC8EF /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F601E1E6D0611007BC8EF /* UIImage+Gif.swift */; };
+		972F60211E6D2661007BC8EF /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F60201E6D2661007BC8EF /* MessageViewController.swift */; };
+		972F60241E6D39EB007BC8EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 972F60221E6D39EB007BC8EF /* Main.storyboard */; };
 		9746A91B1E5F44C50013D856 /* AttoneyLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9746A91A1E5F44C50013D856 /* AttoneyLocationViewController.swift */; };
 		9746A91D1E5F4C1B0013D856 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9746A91C1E5F4C1B0013D856 /* MapKit.framework */; };
 		9746A92B1E5F51BD0013D856 /* 20.png in Resources */ = {isa = PBXBuildFile; fileRef = 9746A91E1E5F51BD0013D856 /* 20.png */; };
@@ -41,6 +48,9 @@
 		974704101E5E1D69004AA051 /* icn_share.png in Resources */ = {isa = PBXBuildFile; fileRef = 9747040F1E5E1D69004AA051 /* icn_share.png */; };
 		974704121E5E2112004AA051 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974704111E5E2112004AA051 /* ShareViewController.swift */; };
 		974704141E5E27C9004AA051 /* icn_notification.png in Resources */ = {isa = PBXBuildFile; fileRef = 974704131E5E27C9004AA051 /* icn_notification.png */; };
+		9781269A1E6E4EE100280F15 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978126991E6E4EE100280F15 /* Notification.swift */; };
+		9781269C1E6E5F3F00280F15 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9781269B1E6E5F3F00280F15 /* NotificationsViewController.swift */; };
+		9781269E1E6E603A00280F15 /* NotificationContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9781269D1E6E603A00280F15 /* NotificationContainerViewController.swift */; };
 		978A19801E59E877005AF43C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978A197F1E59E877005AF43C /* AppDelegate.swift */; };
 		978A19821E59E877005AF43C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978A19811E59E877005AF43C /* HomeViewController.swift */; };
 		978A19841E59E877005AF43C /* VerdictsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978A19831E59E877005AF43C /* VerdictsViewController.swift */; };
@@ -69,6 +79,7 @@
 		978A19E41E5A0E26005AF43C /* btn4.png in Resources */ = {isa = PBXBuildFile; fileRef = 978A19DE1E5A0E26005AF43C /* btn4.png */; };
 		978A19E51E5A0E26005AF43C /* btn5.png in Resources */ = {isa = PBXBuildFile; fileRef = 978A19DF1E5A0E26005AF43C /* btn5.png */; };
 		978A19E61E5A0E26005AF43C /* btn6.png in Resources */ = {isa = PBXBuildFile; fileRef = 978A19E01E5A0E26005AF43C /* btn6.png */; };
+		97949A1A1E6DAAB8003E2649 /* icn_detail.png in Resources */ = {isa = PBXBuildFile; fileRef = 97949A191E6DAAB8003E2649 /* icn_detail.png */; };
 		97A0F7551E6499FC006303E3 /* NearbyMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A0F7541E6499FC006303E3 /* NearbyMapViewController.swift */; };
 		97A0F7571E65CC83006303E3 /* LocationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A0F7561E65CC83006303E3 /* LocationPickerViewController.swift */; };
 		97BB53A11E5BD37900600E22 /* HowToUseAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BB53A01E5BD37900600E22 /* HowToUseAppViewController.swift */; };
@@ -77,7 +88,6 @@
 		97BB53A71E5C546800600E22 /* btnBack1.png in Resources */ = {isa = PBXBuildFile; fileRef = 97BB53A61E5C546800600E22 /* btnBack1.png */; };
 		97BB53AA1E5C61E700600E22 /* howtouse1.png in Resources */ = {isa = PBXBuildFile; fileRef = 97BB53A81E5C61E700600E22 /* howtouse1.png */; };
 		97BB53AB1E5C61E700600E22 /* howtouse2.png in Resources */ = {isa = PBXBuildFile; fileRef = 97BB53A91E5C61E700600E22 /* howtouse2.png */; };
-		97BB53AE1E5C7F6C00600E22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97BB53AC1E5C7F6C00600E22 /* Main.storyboard */; };
 		97BB53B01E5C89A700600E22 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 97BB53AF1E5C89A700600E22 /* background.png */; };
 		97BB53B21E5C90BA00600E22 /* icn_police.png in Resources */ = {isa = PBXBuildFile; fileRef = 97BB53B11E5C90BA00600E22 /* icn_police.png */; };
 		97BB53B41E5C924C00600E22 /* icn_carrepair.png in Resources */ = {isa = PBXBuildFile; fileRef = 97BB53B31E5C924C00600E22 /* icn_carrepair.png */; };
@@ -94,9 +104,17 @@
 		97BB53CC1E5DC3EC00600E22 /* verdicts.html in Resources */ = {isa = PBXBuildFile; fileRef = 97BB53CB1E5DC3EC00600E22 /* verdicts.html */; };
 		97BB53CE1E5DC61100600E22 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BB53CD1E5DC61100600E22 /* AboutUsViewController.swift */; };
 		97BB53D01E5DCD1C00600E22 /* aboutus.html in Resources */ = {isa = PBXBuildFile; fileRef = 97BB53CF1E5DCD1C00600E22 /* aboutus.html */; };
+		97C5B7591E68A41100C25E05 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C5B7581E68A41100C25E05 /* LoginViewController.swift */; };
+		97C5B75E1E68A74700C25E05 /* btnLogin.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C5B75C1E68A74700C25E05 /* btnLogin.png */; };
+		97C5B75F1E68A74700C25E05 /* login_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C5B75D1E68A74700C25E05 /* login_back.png */; };
+		97C5B7621E68A8AF00C25E05 /* login_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C5B7601E68A8AF00C25E05 /* login_icon.png */; };
+		97C5B7631E68A8AF00C25E05 /* login_name.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C5B7611E68A8AF00C25E05 /* login_name.png */; };
+		97C5B7651E68C03A00C25E05 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C5B7641E68C03A00C25E05 /* ChatViewController.swift */; };
 		97CB3FB21E5F19B300EF1029 /* ContactUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB3FB11E5F19B300EF1029 /* ContactUs.swift */; };
 		97CB3FB51E5F2D8F00EF1029 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97CB3FB41E5F2D8F00EF1029 /* MessageUI.framework */; };
 		97CB3FB71E5F2DA900EF1029 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97CB3FB61E5F2DA900EF1029 /* Messages.framework */; };
+		97D055881E6995D4007272F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97D055871E6995D4007272F7 /* GoogleService-Info.plist */; };
+		97FF693A1E6F3CDB0068EAFA /* icn_bell.png in Resources */ = {isa = PBXBuildFile; fileRef = 97FF69391E6F3CDB0068EAFA /* icn_bell.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +138,13 @@
 		74FF42553147017757177C12 /* Pods_HardingLaw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HardingLaw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		776A4A0FA55D9C29B6724A99 /* Pods-HardingLaw.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HardingLaw.release.xcconfig"; path = "Pods/Target Support Files/Pods-HardingLaw/Pods-HardingLaw.release.xcconfig"; sourceTree = "<group>"; };
 		84D304CE3BC00A289B97A175 /* Pods-HardingLaw.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HardingLaw.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HardingLaw/Pods-HardingLaw.debug.xcconfig"; sourceTree = "<group>"; };
+		972B84F21E6D960A00E5FC46 /* icn_message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_message.png; sourceTree = "<group>"; };
+		972F60181E6D03AB007BC8EF /* ChannelListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelListViewController.swift; sourceTree = "<group>"; };
+		972F601A1E6D047C007BC8EF /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		972F601C1E6D0543007BC8EF /* CreateChannelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateChannelCell.swift; sourceTree = "<group>"; };
+		972F601E1E6D0611007BC8EF /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
+		972F60201E6D2661007BC8EF /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		972F60231E6D39EB007BC8EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9746A91A1E5F44C50013D856 /* AttoneyLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttoneyLocationViewController.swift; sourceTree = "<group>"; };
 		9746A91C1E5F4C1B0013D856 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9746A91E1E5F51BD0013D856 /* 20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 20.png; sourceTree = "<group>"; };
@@ -153,6 +178,9 @@
 		9747040F1E5E1D69004AA051 /* icn_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_share.png; sourceTree = "<group>"; };
 		974704111E5E2112004AA051 /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		974704131E5E27C9004AA051 /* icn_notification.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_notification.png; sourceTree = "<group>"; };
+		978126991E6E4EE100280F15 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		9781269B1E6E5F3F00280F15 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		9781269D1E6E603A00280F15 /* NotificationContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationContainerViewController.swift; sourceTree = "<group>"; };
 		978A197C1E59E877005AF43C /* HardingLaw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HardingLaw.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		978A197F1E59E877005AF43C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		978A19811E59E877005AF43C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +215,7 @@
 		978A19DE1E5A0E26005AF43C /* btn4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn4.png; sourceTree = "<group>"; };
 		978A19DF1E5A0E26005AF43C /* btn5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn5.png; sourceTree = "<group>"; };
 		978A19E01E5A0E26005AF43C /* btn6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn6.png; sourceTree = "<group>"; };
+		97949A191E6DAAB8003E2649 /* icn_detail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_detail.png; sourceTree = "<group>"; };
 		97A0F7541E6499FC006303E3 /* NearbyMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMapViewController.swift; sourceTree = "<group>"; };
 		97A0F7561E65CC83006303E3 /* LocationPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationPickerViewController.swift; sourceTree = "<group>"; };
 		97BB53A01E5BD37900600E22 /* HowToUseAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HowToUseAppViewController.swift; sourceTree = "<group>"; };
@@ -195,7 +224,6 @@
 		97BB53A61E5C546800600E22 /* btnBack1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnBack1.png; sourceTree = "<group>"; };
 		97BB53A81E5C61E700600E22 /* howtouse1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = howtouse1.png; sourceTree = "<group>"; };
 		97BB53A91E5C61E700600E22 /* howtouse2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = howtouse2.png; sourceTree = "<group>"; };
-		97BB53AD1E5C7F6C00600E22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = HardingLaw/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		97BB53AF1E5C89A700600E22 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		97BB53B11E5C90BA00600E22 /* icn_police.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_police.png; sourceTree = "<group>"; };
 		97BB53B31E5C924C00600E22 /* icn_carrepair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_carrepair.png; sourceTree = "<group>"; };
@@ -212,9 +240,18 @@
 		97BB53CB1E5DC3EC00600E22 /* verdicts.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = verdicts.html; sourceTree = "<group>"; };
 		97BB53CD1E5DC61100600E22 /* AboutUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		97BB53CF1E5DCD1C00600E22 /* aboutus.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = aboutus.html; sourceTree = "<group>"; };
+		97C5B7581E68A41100C25E05 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		97C5B75C1E68A74700C25E05 /* btnLogin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnLogin.png; sourceTree = "<group>"; };
+		97C5B75D1E68A74700C25E05 /* login_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_back.png; sourceTree = "<group>"; };
+		97C5B7601E68A8AF00C25E05 /* login_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_icon.png; sourceTree = "<group>"; };
+		97C5B7611E68A8AF00C25E05 /* login_name.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_name.png; sourceTree = "<group>"; };
+		97C5B7641E68C03A00C25E05 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		97CB3FB11E5F19B300EF1029 /* ContactUs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUs.swift; sourceTree = "<group>"; };
 		97CB3FB41E5F2D8F00EF1029 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		97CB3FB61E5F2DA900EF1029 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
+		97D055871E6995D4007272F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		97D055891E699601007272F7 /* HardingLaw.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HardingLaw.entitlements; sourceTree = "<group>"; };
+		97FF69391E6F3CDB0068EAFA /* icn_bell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_bell.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,9 +309,12 @@
 		978A197E1E59E877005AF43C /* HardingLaw */ = {
 			isa = PBXGroup;
 			children = (
+				97D055891E699601007272F7 /* HardingLaw.entitlements */,
+				97D055871E6995D4007272F7 /* GoogleService-Info.plist */,
 				978A19B31E59FFDA005AF43C /* Resource */,
 				978A197F1E59E877005AF43C /* AppDelegate.swift */,
 				978A19811E59E877005AF43C /* HomeViewController.swift */,
+				97C5B7581E68A41100C25E05 /* LoginViewController.swift */,
 				97CB3FB11E5F19B300EF1029 /* ContactUs.swift */,
 				978A19831E59E877005AF43C /* VerdictsViewController.swift */,
 				97BB53CD1E5DC61100600E22 /* AboutUsViewController.swift */,
@@ -286,10 +326,19 @@
 				9746A91A1E5F44C50013D856 /* AttoneyLocationViewController.swift */,
 				97A0F7541E6499FC006303E3 /* NearbyMapViewController.swift */,
 				97A0F7561E65CC83006303E3 /* LocationPickerViewController.swift */,
+				9781269D1E6E603A00280F15 /* NotificationContainerViewController.swift */,
+				9781269B1E6E5F3F00280F15 /* NotificationsViewController.swift */,
+				972F601C1E6D0543007BC8EF /* CreateChannelCell.swift */,
+				972F60181E6D03AB007BC8EF /* ChannelListViewController.swift */,
+				97C5B7641E68C03A00C25E05 /* ChatViewController.swift */,
+				972F60201E6D2661007BC8EF /* MessageViewController.swift */,
+				972F601A1E6D047C007BC8EF /* Channel.swift */,
+				978126991E6E4EE100280F15 /* Notification.swift */,
 				978A19881E59E877005AF43C /* Assets.xcassets */,
-				97BB53AC1E5C7F6C00600E22 /* Main.storyboard */,
+				972F60221E6D39EB007BC8EF /* Main.storyboard */,
 				978A198A1E59E878005AF43C /* LaunchScreen.storyboard */,
 				978A198D1E59E878005AF43C /* Info.plist */,
+				972F601E1E6D0611007BC8EF /* UIImage+Gif.swift */,
 			);
 			path = HardingLaw;
 			sourceTree = "<group>";
@@ -326,6 +375,13 @@
 		978A19B41E59FFDA005AF43C /* image */ = {
 			isa = PBXGroup;
 			children = (
+				97FF69391E6F3CDB0068EAFA /* icn_bell.png */,
+				97949A191E6DAAB8003E2649 /* icn_detail.png */,
+				972B84F21E6D960A00E5FC46 /* icn_message.png */,
+				97C5B7601E68A8AF00C25E05 /* login_icon.png */,
+				97C5B7611E68A8AF00C25E05 /* login_name.png */,
+				97C5B75C1E68A74700C25E05 /* btnLogin.png */,
+				97C5B75D1E68A74700C25E05 /* login_back.png */,
 				9746A91E1E5F51BD0013D856 /* 20.png */,
 				9746A91F1E5F51BD0013D856 /* 29.png */,
 				9746A9201E5F51BD0013D856 /* 58.png */,
@@ -488,6 +544,14 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = Q45EDYR9DX;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					978A19911E59E878005AF43C = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -528,6 +592,7 @@
 			files = (
 				97BB53CC1E5DC3EC00600E22 /* verdicts.html in Resources */,
 				97BB53BA1E5C96C200600E22 /* icn_call.png in Resources */,
+				97D055881E6995D4007272F7 /* GoogleService-Info.plist in Resources */,
 				978A19CE1E5A03C8005AF43C /* icn_about_us@2x.png in Resources */,
 				97BB53B01E5C89A700600E22 /* background.png in Resources */,
 				974704101E5E1D69004AA051 /* icn_share.png in Resources */,
@@ -535,9 +600,12 @@
 				978A19E21E5A0E26005AF43C /* btn2.png in Resources */,
 				9746A9371E5F51BD0013D856 /* background_.png in Resources */,
 				97BB53D01E5DCD1C00600E22 /* aboutus.html in Resources */,
+				97C5B7631E68A8AF00C25E05 /* login_name.png in Resources */,
 				978A19D11E5A03C8005AF43C /* icn_home.png in Resources */,
+				972B84F31E6D960A00E5FC46 /* icn_message.png in Resources */,
 				974703F91E5DDA9D004AA051 /* btn_call_attorney.png in Resources */,
 				9746A92D1E5F51BD0013D856 /* 58.png in Resources */,
+				97C5B75E1E68A74700C25E05 /* btnLogin.png in Resources */,
 				978A19D41E5A03C8005AF43C /* icn_media@2x.png in Resources */,
 				978A19E61E5A0E26005AF43C /* btn6.png in Resources */,
 				97BB53C71E5C9FE200600E22 /* btn_hospital.png in Resources */,
@@ -557,6 +625,7 @@
 				97BB53B61E5C94A600600E22 /* icn_hospital.png in Resources */,
 				9746A92E1E5F51BD0013D856 /* 60.png in Resources */,
 				978A19BC1E59FFDA005AF43C /* splash640.png in Resources */,
+				97C5B7621E68A8AF00C25E05 /* login_icon.png in Resources */,
 				97BB53AB1E5C61E700600E22 /* howtouse2.png in Resources */,
 				97BB53AA1E5C61E700600E22 /* howtouse1.png in Resources */,
 				978A19E51E5A0E26005AF43C /* btn5.png in Resources */,
@@ -573,6 +642,7 @@
 				9746A9311E5F51BD0013D856 /* 87.png in Resources */,
 				97BB53A51E5BFE4900600E22 /* topbarback.png in Resources */,
 				97BB53B41E5C924C00600E22 /* icn_carrepair.png in Resources */,
+				972F60241E6D39EB007BC8EF /* Main.storyboard in Resources */,
 				97BB53C61E5C9FE200600E22 /* btn_call.png in Resources */,
 				978A19DA1E5A07EE005AF43C /* topbar@2x.png in Resources */,
 				974704031E5DEC2F004AA051 /* icn_location.png in Resources */,
@@ -580,20 +650,22 @@
 				978A19D21E5A03C8005AF43C /* icn_home@2x.png in Resources */,
 				974703FC1E5DDA9D004AA051 /* btn_location.png in Resources */,
 				978A19D81E5A07EE005AF43C /* logo.png in Resources */,
-				97BB53AE1E5C7F6C00600E22 /* Main.storyboard in Resources */,
 				974704021E5DEC2F004AA051 /* icn_date.png in Resources */,
 				9746A9321E5F51BD0013D856 /* 120.png in Resources */,
+				97C5B75F1E68A74700C25E05 /* login_back.png in Resources */,
 				978A19E31E5A0E26005AF43C /* btn3.png in Resources */,
 				974704061E5DF722004AA051 /* btnRoundBack.png in Resources */,
 				978A19B91E59FFDA005AF43C /* splash1136.png in Resources */,
 				978A19CF1E5A03C8005AF43C /* icn_contacts.png in Resources */,
 				9746A92C1E5F51BD0013D856 /* 29.png in Resources */,
 				97BB53B21E5C90BA00600E22 /* icn_police.png in Resources */,
+				97949A1A1E6DAAB8003E2649 /* icn_detail.png in Resources */,
 				974704041E5DEC2F004AA051 /* icn_time.png in Resources */,
 				974703FB1E5DDA9D004AA051 /* btn_email.png in Resources */,
 				9746A9351E5F51BD0013D856 /* 180.png in Resources */,
 				97BB53CA1E5C9FE200600E22 /* btn_truck.png in Resources */,
 				978A19D01E5A03C8005AF43C /* icn_contacts@2x.png in Resources */,
+				97FF693A1E6F3CDB0068EAFA /* icn_bell.png in Resources */,
 				97BB53C01E5C9C2400600E22 /* btn_police.png in Resources */,
 				97BB53BE1E5C9A3900600E22 /* btn_back.png in Resources */,
 			);
@@ -668,18 +740,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				972F601F1E6D0611007BC8EF /* UIImage+Gif.swift in Sources */,
+				97C5B7591E68A41100C25E05 /* LoginViewController.swift in Sources */,
 				9747040C1E5E197F004AA051 /* NewInjuryViewController.swift in Sources */,
 				97BB53CE1E5DC61100600E22 /* AboutUsViewController.swift in Sources */,
 				97A0F7551E6499FC006303E3 /* NearbyMapViewController.swift in Sources */,
+				9781269E1E6E603A00280F15 /* NotificationContainerViewController.swift in Sources */,
+				972F601B1E6D047C007BC8EF /* Channel.swift in Sources */,
 				978A19841E59E877005AF43C /* VerdictsViewController.swift in Sources */,
 				978A19801E59E877005AF43C /* AppDelegate.swift in Sources */,
+				9781269A1E6E4EE100280F15 /* Notification.swift in Sources */,
 				97A0F7571E65CC83006303E3 /* LocationPickerViewController.swift in Sources */,
 				978A19821E59E877005AF43C /* HomeViewController.swift in Sources */,
 				9746A91B1E5F44C50013D856 /* AttoneyLocationViewController.swift in Sources */,
 				9747040E1E5E1A2B004AA051 /* EmergencyServiceViewController.swift in Sources */,
+				972F601D1E6D0543007BC8EF /* CreateChannelCell.swift in Sources */,
 				974704121E5E2112004AA051 /* ShareViewController.swift in Sources */,
+				972F60211E6D2661007BC8EF /* MessageViewController.swift in Sources */,
 				97BB53A11E5BD37900600E22 /* HowToUseAppViewController.swift in Sources */,
 				9746A93B1E6006270013D856 /* MediaViewController.swift in Sources */,
+				97C5B7651E68C03A00C25E05 /* ChatViewController.swift in Sources */,
+				9781269C1E6E5F3F00280F15 /* NotificationsViewController.swift in Sources */,
+				972F60191E6D03AB007BC8EF /* ChannelListViewController.swift in Sources */,
 				97CB3FB21E5F19B300EF1029 /* ContactUs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -716,21 +798,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		972F60221E6D39EB007BC8EF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				972F60231E6D39EB007BC8EF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		978A198A1E59E878005AF43C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				978A198B1E59E878005AF43C /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		97BB53AC1E5C7F6C00600E22 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				97BB53AD1E5C7F6C00600E22 /* Base */,
-			);
-			name = Main.storyboard;
-			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -834,8 +915,10 @@
 			baseConfigurationReference = 84D304CE3BC00A289B97A175 /* Pods-HardingLaw.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HardingLaw/HardingLaw.entitlements;
 				DEVELOPMENT_TEAM = Q45EDYR9DX;
 				INFOPLIST_FILE = HardingLaw/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dcmmoguls.HardingLaw;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -848,8 +931,10 @@
 			baseConfigurationReference = 776A4A0FA55D9C29B6724A99 /* Pods-HardingLaw.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HardingLaw/HardingLaw.entitlements;
 				DEVELOPMENT_TEAM = Q45EDYR9DX;
 				INFOPLIST_FILE = HardingLaw/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dcmmoguls.HardingLaw;
 				PRODUCT_NAME = "$(TARGET_NAME)";

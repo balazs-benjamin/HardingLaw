@@ -13,6 +13,9 @@ import GooglePlacePicker
 
 import MessageUI
 
+import Firebase
+import UICircularProgressRing
+
 extension UIViewController
 {
     func hideKeyboard()
@@ -27,6 +30,12 @@ extension UIViewController
     func dismissKeyboard()
     {
         view.endEditing(true)
+    }
+}
+
+extension Date {
+    var ticks: UInt64 {
+        return UInt64((self.timeIntervalSince1970 + 62_135_596_800) * 10_000_000)
     }
 }
 
@@ -74,15 +83,28 @@ class NewInjuryViewController: UIViewController, UITextFieldDelegate, UINavigati
     @IBOutlet var imageView5: UIImageView!
     @IBOutlet var imageView6: UIImageView!
     
-    var strLatitude:String!
-    var strLongitue:String!
+    var accidentPhoto1: String! = ""
+    var accidentPhoto2: String! = ""
+    var accidentPhoto3: String! = ""
+    var injuredPhoto1: String! = ""
+    var injuredPhoto2: String! = ""
+    var policePhoto: String! = ""
+    
+    
+    var strLatitude:String! = "0"
+    var strLongitue:String! = "0"
     
     var nBtnTag = 0;
+    
+    var storageRef : FIRStorageReference = FIRStorageReference()
+    
+    var imgCount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.hideKeyboard()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -202,21 +224,27 @@ class NewInjuryViewController: UIViewController, UITextFieldDelegate, UINavigati
         switch nBtnTag {
         case 111:
             imageView1.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+            imgCount += 1
             break
         case 112:
             imageView2.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+            imgCount += 1
             break
         case 113:
             imageView3.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+            imgCount += 1
             break
         case 114:
             imageView4.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+            imgCount += 1
             break
         case 115:
             imageView5.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+            imgCount += 1
             break
         case 116:
             imageView6.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+            imgCount += 1
             break
         default:
             break
@@ -224,7 +252,7 @@ class NewInjuryViewController: UIViewController, UITextFieldDelegate, UINavigati
     }
     
     func showToast(string: String!, focus: Bool = false, textField:UITextField! = nil) {
-        let toastLabel = UILabel(frame: CGRect(x:self.view.frame.size.width/2 - 150, y:self.view.frame.size.height-100, width:300, height:35))
+        let toastLabel = UILabel(frame: CGRect(x:self.view.frame.size.width/2 - 150, y:self.view.frame.size.height/2, width:300, height:35))
         toastLabel.backgroundColor = UIColor.black
         toastLabel.textColor = UIColor.white
         toastLabel.textAlignment = NSTextAlignment.center
@@ -233,124 +261,288 @@ class NewInjuryViewController: UIViewController, UITextFieldDelegate, UINavigati
         toastLabel.alpha = 1.0
         toastLabel.layer.cornerRadius = 10;
         toastLabel.clipsToBounds  =  true
+
+        if focus {
+            textField.becomeFirstResponder()
+        }
+        
         UIView.animate(withDuration: 4.0, delay: 0.1, options: UIViewAnimationOptions.curveEaseOut, animations: {
             
             toastLabel.alpha = 0.0
-            if focus {
-                textField.becomeFirstResponder()
-            }
             
         })
     }
     
-    @IBAction func submitReport() {
-        if !MFMailComposeViewController.canSendMail() {
-            showToast(string: "Mail services are not available.")
-            print("Mail services are not available")
-            //return
+    func uploadingPhotos() {
+        let currentUser = FIRAuth.auth()?.currentUser
+        
+        
+        let progressRing = UICircularProgressRingView(frame: CGRect(x: view.frame.width/2 - 75, y: view.frame.height/2-75, width: 170, height: 170))
+        // Change any of the properties you'd like
+        progressRing.maxValue = 100
+        progressRing.outerRingColor = UIColor.green
+        progressRing.innerRingColor = UIColor.blue
+        progressRing.valueIndicator = "% uploaded"
+        self.view.addSubview(progressRing)
+        
+        var uploadValue:CGFloat = 0;
+        let step:CGFloat = 100.0/CGFloat(imgCount);
+        var completedUploading = 0;
+        //uploading image1
+        if imageView1.image != nil,  let uploadData = UIImageJPEGRepresentation(imageView1.image!, 0.5) {
+            
+            if let uid = currentUser?.uid {
+                let ticks = Date().ticks
+                storageRef = FIRStorage.storage().reference().child("InjuryPictures/\(uid)/\(ticks)")
+            }
+            
+            let uploadTask = storageRef.put(uploadData, metadata: nil) { snapshot, error in
+                if let error = error {
+                    print(error)
+                }
+            }
+            
+            // Shows progress bar until saved
+            uploadTask.observe(.progress) { snapshot in
+                //progressBar1.observedProgress = snapshot.progress
+                uploadValue += CGFloat((snapshot.progress?.fractionCompleted)!)*step
+                uploadValue = uploadValue > 100 ? 100: uploadValue
+                progressRing.setProgress(value: uploadValue, animationDuration: 1.0)
+            }
+            
+            uploadTask.observe(.success) { snapshot in
+                if let profileImageURL = snapshot.metadata?.downloadURL()?.absoluteString {
+                    completedUploading += 1;
+                    self.accidentPhoto1 = "<a href=" + profileImageURL + ">VIEW PHOTO</a><br>"
+                    if completedUploading == self.imgCount {
+                        progressRing.removeFromSuperview()
+                        progressRing.isHidden = true
+                        self.submit()
+                    }
+                }
+            }
         }
         
-        if self.locationField.text == "" {
-            showToast(string: "Location* required.", focus:true, textField:self.locationField)
-            return
+        //uploading image2
+        if imageView2.image != nil,  let uploadData = UIImageJPEGRepresentation(imageView2.image!, 0.5) {
+            
+            if let uid = currentUser?.uid {
+                let ticks = Date().ticks
+                storageRef = FIRStorage.storage().reference().child("InjuryPictures/\(uid)/\(ticks)")
+            }
+            
+            let uploadTask = storageRef.put(uploadData, metadata: nil) { snapshot, error in
+                if let error = error {
+                    print(error)
+                }
+            }
+            
+            // Shows progress bar until saved
+            uploadTask.observe(.progress) { snapshot in
+                uploadValue += CGFloat((snapshot.progress?.fractionCompleted)!)*step
+                uploadValue = uploadValue > 100 ? 100: uploadValue
+                progressRing.setProgress(value: uploadValue, animationDuration: 1.0)
+            }
+            
+            uploadTask.observe(.success) { snapshot in
+                if let profileImageURL = snapshot.metadata?.downloadURL()?.absoluteString {
+                    completedUploading += 1;
+                    self.accidentPhoto2 = "<a href=" + profileImageURL + ">VIEW PHOTO</a><br>"
+                    if completedUploading == self.imgCount {
+                        progressRing.removeFromSuperview()
+                        progressRing.isHidden = true
+                        self.submit()
+                    }
+                }
+            }
+        }
+        
+        //uploading image3
+        if imageView3.image != nil,  let uploadData = UIImageJPEGRepresentation(imageView3.image!, 0.5) {
+            
+            if let uid = currentUser?.uid {
+                let ticks = Date().ticks
+                storageRef = FIRStorage.storage().reference().child("InjuryPictures/\(uid)/\(ticks)")
+            }
+            
+            let uploadTask = storageRef.put(uploadData, metadata: nil) { snapshot, error in
+                if let error = error {
+                    print(error)
+                }
+            }
+            
+            // Shows progress bar until saved
+            uploadTask.observe(.progress) { snapshot in
+                uploadValue += CGFloat((snapshot.progress?.fractionCompleted)!)*step
+                uploadValue = uploadValue > 100 ? 100: uploadValue
+                progressRing.setProgress(value: uploadValue, animationDuration: 1.0)
+            }
+            
+            uploadTask.observe(.success) { snapshot in
+                if let profileImageURL = snapshot.metadata?.downloadURL()?.absoluteString {
+                    completedUploading += 1;
+                    self.accidentPhoto3 = "<a href=" + profileImageURL + ">VIEW PHOTO</a><br>"
+                    if completedUploading == self.imgCount {
+                        progressRing.removeFromSuperview()
+                        progressRing.isHidden = true
+                        self.submit()
+                    }
+                }
+            }
+        }
+        
+        //uploading image4
+        if imageView4.image != nil, let uploadData = UIImageJPEGRepresentation(imageView4.image!, 0.5) {
+            
+            if let uid = currentUser?.uid {
+                let ticks = Date().ticks
+                storageRef = FIRStorage.storage().reference().child("InjuryPictures/\(uid)/\(ticks)")
+            }
+            
+            let uploadTask = storageRef.put(uploadData, metadata: nil) { snapshot, error in
+                if let error = error {
+                    print(error)
+                }
+            }
+            
+            // Shows progress bar until saved
+            uploadTask.observe(.progress) { snapshot in
+                uploadValue += CGFloat((snapshot.progress?.fractionCompleted)!)*step
+                uploadValue = uploadValue > 100 ? 100: uploadValue
+                progressRing.setProgress(value: uploadValue, animationDuration: 1.0)
+            }
+            
+            uploadTask.observe(.success) { snapshot in
+                if let profileImageURL = snapshot.metadata?.downloadURL()?.absoluteString {
+                    completedUploading += 1;
+                    self.injuredPhoto1 = "<a href=" + profileImageURL + ">VIEW PHOTO</a><br>"
+                    if completedUploading == self.imgCount {
+                        progressRing.removeFromSuperview()
+                        progressRing.isHidden = true
+                        self.submit()
+                    }
+                }
+            }
         }
 
-        if self.dateField.text == "" {
-            showToast(string: "Date* required.", focus:true, textField:self.dateField)
-            return
+        //uploading image5
+        if imageView5.image != nil, let uploadData = UIImageJPEGRepresentation(imageView5.image!, 0.5) {
+            
+            if let uid = currentUser?.uid {
+                let ticks = Date().ticks
+                storageRef = FIRStorage.storage().reference().child("InjuryPictures/\(uid)/\(ticks)")
+            }
+            
+            let uploadTask = storageRef.put(uploadData, metadata: nil) { snapshot, error in
+                if let error = error {
+                    print(error)
+                }
+            }
+            
+            // Shows progress bar until saved
+            uploadTask.observe(.progress) { snapshot in
+                uploadValue += CGFloat((snapshot.progress?.fractionCompleted)!)*step
+                uploadValue = uploadValue > 100 ? 100: uploadValue
+                progressRing.setProgress(value: uploadValue, animationDuration: 1.0)
+            }
+            
+            uploadTask.observe(.success) { snapshot in
+                if let profileImageURL = snapshot.metadata?.downloadURL()?.absoluteString {
+                    completedUploading += 1;
+                    self.injuredPhoto2 = "<a href=" + profileImageURL + ">VIEW PHOTO</a><br>"
+                    if completedUploading == self.imgCount {
+                        progressRing.removeFromSuperview()
+                        progressRing.isHidden = true
+                        self.submit()
+                    }
+                }
+            }
+        }
+        
+        //uploading image6
+        if imageView6.image != nil, let uploadData = UIImageJPEGRepresentation(imageView6.image!, 0.5) {
+            
+            if let uid = currentUser?.uid {
+                let ticks = Date().ticks
+                storageRef = FIRStorage.storage().reference().child("InjuryPictures/\(uid)/\(ticks)")
+            }
+            
+            let uploadTask = storageRef.put(uploadData, metadata: nil) { snapshot, error in
+                if let error = error {
+                    print(error)
+                }
+            }
+            
+            // Shows progress bar until saved
+            uploadTask.observe(.progress) { snapshot in
+                uploadValue += CGFloat((snapshot.progress?.fractionCompleted)!)*step
+                uploadValue = uploadValue > 100 ? 100: uploadValue
+                progressRing.setProgress(value: uploadValue, animationDuration: 1.0)
+            }
+            
+            uploadTask.observe(.success) { snapshot in
+                if let profileImageURL = snapshot.metadata?.downloadURL()?.absoluteString {
+                    completedUploading += 1;
+                    self.policePhoto = "<a href=" + profileImageURL + ">VIEW PHOTO</a><br>"
+                    if completedUploading == self.imgCount {
+                        progressRing.removeFromSuperview()
+                        progressRing.isHidden = true
+                        self.submit()
+                    }
+                }
+            }
         }
 
-        if self.timeField.text == "" {
-            showToast(string: "Time* required.", focus:true, textField:self.timeField)
-            return
-        }
-        
-        if self.yourName.text == "" {
-            showToast(string: "Your Name* required.", focus:true, textField:self.yourName)
-            return
-        }
-        
-        if self.yourPhone.text == "" {
-            showToast(string: "Your Phone Number* required.", focus:true, textField:self.timeField)
-            return
-        }
-        
-        if self.yourAddress.text == "" {
-            showToast(string: "Your Address* required.", focus:true, textField:self.yourAddress)
-            return
-        }
-        
-        if self.yourLicense.text == "" {
-            showToast(string: "Your License Plate* required.", focus:true, textField:self.yourLicense)
-            return
-        }
-        
-        if imageView1.image == nil {
-            showToast(string: "1st Accident Photo* required.")
-            return
-        }
-
-        if imageView2.image == nil {
-            showToast(string: "2nd Accident Photo* required.")
-            return
-        }
-
-        if imageView3.image == nil {
-            showToast(string: "3rd Accident Photo* required.")
-            return
-        }
-        
-        
-        
-
-        
+    }
+    
+    func submit() {
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = self
         
         // Configure the fields of the interface.
-        composeVC.setToRecipients(["zimin_alexander@outlook.com"])
+        composeVC.setToRecipients(["myhopewin@gmail.com"])
         composeVC.setSubject("New Injury Report")
-        var strReport: String = "<b>Location*::</b><br>" + "<a href=https://www.google.com/maps?q=" + strLatitude + "," + strLongitue + ">VIEW MAP</a><br>"
-        strReport += "<b>Date*::</b><br>" + self.dateField.text! + "<br>"
-        strReport += "<b>Time*::</b><br>" + self.timeField.text! + "<br>"
-
-        strReport += "<b>Your Name*::</b><br>" + self.yourName.text! + "<br>"
-        strReport += "<b>Your Phone*::</b><br>" + self.yourPhone.text! + "<br>"
-        strReport += "<b>Your Address*::</b><br>" + self.yourAddress.text! + "<br>"
-        strReport += "<b>Your License Plate*::</b><br>" + self.yourLicense.text! + "<br><br>"
         
-        strReport += "<b>1st Accident Photo*::</b><br>"
-        composeVC.addAttachmentData(UIImageJPEGRepresentation(self.imageView1.image!, CGFloat(1.0))!, mimeType: "image/jpeg", fileName:  "1st Accident Photo.jpeg")
-        strReport += "<b>2nd Accident Photo*::</b><br>"
-        strReport += "<b>3rd Accident Photo*::</b><br>"
-
-        strReport += "<b>Other Driver's Information::</b><br>"
-        strReport += "<b>Other Driver's Name::</b><br>" + self.driverName.text! + "<br>"
-        strReport += "<b>Other Driver's Phone Number::</b><br>" + self.driverPhone.text! + "<br>"
-        strReport += "<b>Other Driver's License Plate::</b><br>" + self.driverLicense.text! + "<br>"
-        strReport += "<b>Vehicle Make/Model::</b><br>" + self.vehicleModel.text! + "<br>"
-        strReport += "<b>Insurance Company::</b><br>" + self.insuranceCompany.text! + "<br><br>"
+        var strReport: String = "<b>Location*:</b><br>" + "<a href=https://www.google.com/maps?q=" + strLatitude + "," + strLongitue + ">VIEW MAP</a><br>"
+        strReport += "<b>Date*:</b><br>" + self.dateField.text! + "<br>"
+        strReport += "<b>Time*:</b><br>" + self.timeField.text! + "<br>"
         
-        strReport += "<b>Witness Information::</b><br>"
-        strReport += "<b>Witness 1 Name::</b><br>" + self.witnessName1.text! + "<br>"
-        strReport += "<b>Witness 1 Phone Number::</b><br>" + self.witnessPhone1.text! + "<br>"
-        strReport += "<b>Witness 2 Name::</b><br>" + self.witnessName2.text! + "<br>"
-        strReport += "<b>Witness 2 Phone Number::</b><br>" + self.witnessPhone2.text! + "<br><br>"
+        strReport += "<b>Your Name*:</b><br>" + self.yourName.text! + "<br>"
+        strReport += "<b>Your Phone*:</b><br>" + self.yourPhone.text! + "<br>"
+        strReport += "<b>Your Address*:</b><br>" + self.yourAddress.text! + "<br>"
+        strReport += "<b>Your License Plate*:</b><br>" + self.yourLicense.text! + "<br><br>"
         
-        strReport += "<b>Injured Information::</b><br>"
-        strReport += "<b>Injured 1 Name::</b><br>" + self.injuredName1.text! + "<br>"
-        strReport += "<b>Injured 1 Phone Number::</b><br>" + self.injuredPhone1.text! + "<br>"
-        strReport += "<b>Injured 1 Photo*::</b><br>"
-
-        strReport += "<b>Injured 2 Name::</b><br>" + self.injuredName2.text! + "<br>"
-        strReport += "<b>Injured 2 Phone Number::</b><br>" + self.injuredPhone2.text! + "<br><br>"
-        strReport += "<b>Injured 2 Photo*::</b><br>"
+        strReport += "<b>1st Accident Photo*:</b><br>" + accidentPhoto1 + "<br>"
+        strReport += "<b>2nd Accident Photo*:</b><br>" + accidentPhoto2 + "<br>"
+        strReport += "<b>3rd Accident Photo*:</b><br>" + accidentPhoto3 + "<br><br>"
         
-        strReport += "<b>Police Information::</b><br>"
-        strReport += "<b>Police Name::</b><br>" + self.policeName.text! + "<br>"
-        strReport += "<b>Police Number::</b><br>" + self.policeNumber.text! + "<br>"
-        strReport += "<b>Police Report Number::</b><br>" + self.policeReportNumber.text! + "<br><br>"
-        strReport += "<b>Police Photo*::</b><br>"
+        strReport += "<b>-Other Driver's Information</b><br><br>"
+        strReport += "<b>Other Driver's Name:</b><br>" + self.driverName.text! + "<br>"
+        strReport += "<b>Other Driver's Phone Number:</b><br>" + self.driverPhone.text! + "<br>"
+        strReport += "<b>Other Driver's License Plate:</b><br>" + self.driverLicense.text! + "<br>"
+        strReport += "<b>Vehicle Make/Model:</b><br>" + self.vehicleModel.text! + "<br>"
+        strReport += "<b>Insurance Company:</b><br>" + self.insuranceCompany.text! + "<br><br>"
+        
+        strReport += "<b>-Witness Information</b><br><br>"
+        strReport += "<b>Witness 1 Name:</b><br>" + self.witnessName1.text! + "<br>"
+        strReport += "<b>Witness 1 Phone Number:</b><br>" + self.witnessPhone1.text! + "<br>"
+        strReport += "<b>Witness 2 Name:</b><br>" + self.witnessName2.text! + "<br>"
+        strReport += "<b>Witness 2 Phone Number:</b><br>" + self.witnessPhone2.text! + "<br><br>"
+        
+        strReport += "<b>-Injured Information</b><br><br>"
+        strReport += "<b>Injured 1 Name:</b><br>" + self.injuredName1.text! + "<br>"
+        strReport += "<b>Injured 1 Phone Number:</b><br>" + self.injuredPhone1.text! + "<br>"
+        strReport += "<b>Injured 1 Photo*:</b><br>" + injuredPhoto1 + "<br>"
+        
+        strReport += "<b>Injured 2 Name:</b><br>" + self.injuredName2.text! + "<br>"
+        strReport += "<b>Injured 2 Phone Number:</b><br>" + self.injuredPhone2.text! + "<br>"
+        strReport += "<b>Injured 2 Photo*:</b><br>" + injuredPhoto2 + "<br>"
+        
+        strReport += "<b>-Police Information</b><br><br>"
+        strReport += "<b>Police Name:</b><br>" + self.policeName.text! + "<br>"
+        strReport += "<b>Police Number:</b><br>" + self.policeNumber.text! + "<br>"
+        strReport += "<b>Police Report Number:</b><br>" + self.policeReportNumber.text! + "<br>"
+        strReport += "<b>Police Photo*:</b><br>" + policePhoto + "<br>"
         
         
         
@@ -358,6 +550,66 @@ class NewInjuryViewController: UIViewController, UITextFieldDelegate, UINavigati
         
         // Present the view controller modally.
         self.present(composeVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func submitReport() {
+        if !MFMailComposeViewController.canSendMail() {
+            showToast(string: "Mail services are not available.")
+            print("Mail services are not available")
+            return
+        }
+        
+        if self.locationField.text == "" {
+            showToast(string: "Location* required.")
+            return
+        }
+        
+        if self.dateField.text == "" {
+            showToast(string: "Date* required.")
+            return
+        }
+        
+        if self.timeField.text == "" {
+            showToast(string: "Time* required.")
+            return
+        }
+        
+        if self.yourName.text == "" {
+            showToast(string: "Your Name* required.")
+            return
+        }
+        
+        if self.yourPhone.text == "" {
+            showToast(string: "Your Phone Number* required.")
+            return
+        }
+        
+        if self.yourAddress.text == "" {
+            showToast(string: "Your Address* required.")
+            return
+        }
+        
+        if self.yourLicense.text == "" {
+            showToast(string: "Your License Plate* required.")
+            return
+        }
+        
+        if imageView1.image == nil {
+            showToast(string: "1st Accident Photo* required.")
+            return
+        }
+        
+        if imageView2.image == nil {
+            showToast(string: "2nd Accident Photo* required.")
+            return
+        }
+        
+        if imageView3.image == nil {
+            showToast(string: "3rd Accident Photo* required.")
+            return
+        }
+        
+        uploadingPhotos()
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController,

@@ -24,7 +24,7 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
     var lat = 39.746478
     var long = -104.991775
     var radius = 5000
-    var APIKey = "AIzaSyDfFAcntiyqlGhxK8siXHgxnPYM4UIzOVk"
+    var APIKey = "AIzaSyC2ClpFioBjXqsqSkqmtseJj3kK98wmKo8"
     var type = ""
     var bFirstLoad = true
     var titleString: String = ""
