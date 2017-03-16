@@ -15,7 +15,7 @@ class AboutUsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        //webView.loadRequest(URLRequest(url: URL(string:  "http://www.hlaw.org/verdictsAndSettlements.asp")!))
+        //webView.loadRequest(URLRequest(url: URL(string:  "http://www.hlaw.org/movies.asp")!))
         let urlView = Bundle.main.url(forResource: "aboutus", withExtension: "html")
         webView.loadRequest(URLRequest(url: urlView!))
     }

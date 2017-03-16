@@ -17,6 +17,7 @@ class ShareViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        textView.text = "Harding Law is the amazing app.\nPlease use this app.\nYou can download from https://itunes.apple.com/us/app/HardingLaw/id"
     }
     
     override func viewDidAppear(_ animated: Bool) {
