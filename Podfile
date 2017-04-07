@@ -1,9 +1,6 @@
 # Uncomment this line to define a global platform for your project
 # platform :ios, '9.0'
 
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '10.0'
-
 target 'HardingLaw' do
     use_frameworks!
 
@@ -18,9 +15,14 @@ target 'HardingLaw' do
     pod 'Firebase/RemoteConfig'
     pod 'JSQMessagesViewController'
     
+    pod 'Firebase/Core'
+    pod 'Firebase/Messaging'
+    
     pod 'OneSignal'
     
     pod 'UICircularProgressRing'
+    
+    pod 'Firebase/Core'
     
     pod "youtube-ios-player-helper", "~> 0.1.4"
     

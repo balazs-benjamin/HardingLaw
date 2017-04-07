@@ -28,7 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        sleep(0);
         
         GMSServices.provideAPIKey("AIzaSyAn049CvaRxsquyCgxVU7zM5YeQwIQH_Rs")
         GMSPlacesClient.provideAPIKey("AIzaSyAn049CvaRxsquyCgxVU7zM5YeQwIQH_Rs")
@@ -36,13 +35,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         FIRApp.configure()
         
         if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            
             let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
             UNUserNotificationCenter.current().requestAuthorization(
                 options: authOptions,
                 completionHandler: {_, _ in })
             
-            // For iOS 10 display notification (sent via APNS)
-            UNUserNotificationCenter.current().delegate = self
+            // For iOS 10 data message (sent via FCM)
+            //FIRMessaging.messaging().remoteMessageDelegate = self
+            
         } else {
             let settings: UIUserNotificationSettings =
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
@@ -60,6 +63,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 let value = snapshot.value as? NSDictionary
                 isAdmin = value?["isAdmin"] as? Bool ?? false
                 UserDefaults.standard.set(isAdmin, forKey: "isAdmin")
+                
+                FIRAnalytics.logEvent(withName: "App opened", parameters: [
+                    "name": "App Opend" as NSObject,
+                    "full_text": "User id: \(userID)" as NSObject
+                    ])
             }) { (error) in
                 print(error.localizedDescription)
             }

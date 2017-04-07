@@ -63,7 +63,10 @@ final class NotificationsViewController: JSQMessagesViewController {
             let userData = snapshot.value as! Dictionary<String, Any>
             
             let oneSignalId = userData["OneSignalId"] as! String
-            let isAdmin = userData["isAdmin"] as! Bool
+            var isAdmin = false
+            if let val = userData["isAdmin"] {
+                isAdmin = val as! Bool
+            }
             
             if self.IamAdmin {
                 if !isAdmin{

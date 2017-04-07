@@ -103,6 +103,13 @@ class LoginViewController: UIViewController {
                 }               
 
             })
+        } else {
+            let alertController = UIAlertController(title: "Error", message: "Please enter your name.", preferredStyle: .alert)
+            
+            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(defaultAction)
+            
+            self.present(alertController, animated: true, completion: nil)
         }
         
     }
@@ -118,7 +125,7 @@ class LoginViewController: UIViewController {
         let userDefaults = UserDefaults.standard
         userDefaults.set(newChannelRef.key, forKey: "channel")
         userDefaults.synchronize()
-}
+    }
     
     
 }

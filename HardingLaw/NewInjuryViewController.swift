@@ -173,7 +173,6 @@ class NewInjuryViewController: UIViewController, UITextFieldDelegate, UINavigati
             datePicker1.datePickerMode = UIDatePickerMode.date
             textField.inputView = datePicker1
             datePicker1.addTarget(self, action: #selector(datePickerChanged(sender:)), for: .valueChanged)
-            
         } else if textField.tag == 3 {
             datePicker2.datePickerMode = UIDatePickerMode.time
             textField.inputView = datePicker2
@@ -289,14 +288,20 @@ class NewInjuryViewController: UIViewController, UITextFieldDelegate, UINavigati
         let step:CGFloat = 100.0/CGFloat(imgCount);
         var completedUploading = 0;
         //uploading image1
+        
+        let newMetadata = FIRStorageMetadata()
+        newMetadata.cacheControl = "public,max-age=300";
+        newMetadata.contentType = "image/jpeg";
+        
         if imageView1.image != nil,  let uploadData = UIImageJPEGRepresentation(imageView1.image!, 0.5) {
             
             if let uid = currentUser?.uid {
                 let ticks = Date().ticks
-                storageRef = FIRStorage.storage().reference().child("InjuryPictures/\(uid)/\(ticks)")
+                storageRef = FIRStorage.storage().reference().child("InjuryPictures/\(uid)/\(ticks).jpg")
             }
             
-            let uploadTask = storageRef.put(uploadData, metadata: nil) { snapshot, error in
+            
+            let uploadTask = storageRef.put(uploadData, metadata: newMetadata) { snapshot, error in
                 if let error = error {
                     print(error)
                 }
@@ -328,10 +333,10 @@ class NewInjuryViewController: UIViewController, UITextFieldDelegate, UINavigati
             
             if let uid = currentUser?.uid {
                 let ticks = Date().ticks
-                storageRef = FIRStorage.storage().reference().child("InjuryPictures/\(uid)/\(ticks)")
+                storageRef = FIRStorage.storage().reference().child("InjuryPictures/\(uid)/\(ticks).jpg")
             }
             
-            let uploadTask = storageRef.put(uploadData, metadata: nil) { snapshot, error in
+            let uploadTask = storageRef.put(uploadData, metadata: newMetadata) { snapshot, error in
                 if let error = error {
                     print(error)
                 }
@@ -362,10 +367,10 @@ class NewInjuryViewController: UIViewController, UITextFieldDelegate, UINavigati
             
             if let uid = currentUser?.uid {
                 let ticks = Date().ticks
-                storageRef = FIRStorage.storage().reference().child("InjuryPictures/\(uid)/\(ticks)")
+                storageRef = FIRStorage.storage().reference().child("InjuryPictures/\(uid)/\(ticks).jpg")
             }
             
-            let uploadTask = storageRef.put(uploadData, metadata: nil) { snapshot, error in
+            let uploadTask = storageRef.put(uploadData, metadata: newMetadata) { snapshot, error in
                 if let error = error {
                     print(error)
                 }
@@ -396,10 +401,10 @@ class NewInjuryViewController: UIViewController, UITextFieldDelegate, UINavigati
             
             if let uid = currentUser?.uid {
                 let ticks = Date().ticks
-                storageRef = FIRStorage.storage().reference().child("InjuryPictures/\(uid)/\(ticks)")
+                storageRef = FIRStorage.storage().reference().child("InjuryPictures/\(uid)/\(ticks).jpg")
             }
             
-            let uploadTask = storageRef.put(uploadData, metadata: nil) { snapshot, error in
+            let uploadTask = storageRef.put(uploadData, metadata: newMetadata) { snapshot, error in
                 if let error = error {
                     print(error)
                 }
@@ -430,10 +435,10 @@ class NewInjuryViewController: UIViewController, UITextFieldDelegate, UINavigati
             
             if let uid = currentUser?.uid {
                 let ticks = Date().ticks
-                storageRef = FIRStorage.storage().reference().child("InjuryPictures/\(uid)/\(ticks)")
+                storageRef = FIRStorage.storage().reference().child("InjuryPictures/\(uid)/\(ticks).jpg")
             }
             
-            let uploadTask = storageRef.put(uploadData, metadata: nil) { snapshot, error in
+            let uploadTask = storageRef.put(uploadData, metadata: newMetadata) { snapshot, error in
                 if let error = error {
                     print(error)
                 }
@@ -464,10 +469,10 @@ class NewInjuryViewController: UIViewController, UITextFieldDelegate, UINavigati
             
             if let uid = currentUser?.uid {
                 let ticks = Date().ticks
-                storageRef = FIRStorage.storage().reference().child("InjuryPictures/\(uid)/\(ticks)")
+                storageRef = FIRStorage.storage().reference().child("InjuryPictures/\(uid)/\(ticks).jpg")
             }
             
-            let uploadTask = storageRef.put(uploadData, metadata: nil) { snapshot, error in
+            let uploadTask = storageRef.put(uploadData, metadata: newMetadata) { snapshot, error in
                 if let error = error {
                     print(error)
                 }
@@ -500,7 +505,7 @@ class NewInjuryViewController: UIViewController, UITextFieldDelegate, UINavigati
         composeVC.mailComposeDelegate = self
         
         // Configure the fields of the interface.
-        composeVC.setToRecipients(["myhopewin@gmail.com"])
+        composeVC.setToRecipients(["phil@hlaw.org", "lisa@hlaw.org", "kim@hlaw.org", "jeff@hlaw.org"])
         composeVC.setSubject("New Injury Report")
         
         var strReport: String = "<b>Location*:</b><br>" + "<a href=https://www.google.com/maps?q=" + strLatitude + "," + strLongitue + ">VIEW MAP</a><br>"
@@ -553,6 +558,9 @@ class NewInjuryViewController: UIViewController, UITextFieldDelegate, UINavigati
     }
     
     @IBAction func submitReport() {
+        view.endEditing(true)
+        
+        
         if !MFMailComposeViewController.canSendMail() {
             showToast(string: "Mail services are not available.")
             print("Mail services are not available")
@@ -618,6 +626,11 @@ class NewInjuryViewController: UIViewController, UITextFieldDelegate, UINavigati
         
         // Dismiss the mail compose view controller.
         controller.dismiss(animated: true, completion: nil)
+        
+        FIRAnalytics.logEvent(withName: "New Accident Report Sent", parameters: [
+            "name": "New Accident Report Sent" as NSObject,
+            "full_text": "User sent New Accident Report" as NSObject
+            ])
     }
 }
 
