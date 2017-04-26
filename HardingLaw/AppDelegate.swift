@@ -24,6 +24,8 @@ enum UIUserInterfaceIdiom : Int {
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
+    
+    private lazy var channelRef: FIRDatabaseReference = FIRDatabase.database().reference().child("channels")
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -56,15 +58,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         //OneSignal.registerForPushNotifications()
         
+        let userDefaults = UserDefaults.standard
+
+        
         var isAdmin = false
         
         if let userID = FIRAuth.auth()?.currentUser?.uid {
             FIRDatabase.database().reference().child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
                 isAdmin = value?["isAdmin"] as? Bool ?? false
+                let userID = snapshot.key
+                let userName = value?["name"] as! String
                 UserDefaults.standard.set(isAdmin, forKey: "isAdmin")
+                userDefaults.set(userID, forKey: "userid")
+                userDefaults.set(userID, forKey: "channel")
+                userDefaults.set(userName, forKey: "user_name")
                 
-                FIRAnalytics.logEvent(withName: "App opened", parameters: [
+                FIRAnalytics.logEvent(withName: "app_opened", parameters: [
                     "name": "App Opend" as NSObject,
                     "full_text": "User id: \(userID)" as NSObject
                     ])
@@ -72,23 +82,90 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 print(error.localizedDescription)
             }
         }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
         OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_NONE)
         
         OneSignal.initWithLaunchOptions(launchOptions, appId: "0a0cf4e9-5278-4f12-aa91-9611e0f9337a", handleNotificationReceived: { (notification) in
-            print("Received Notification - \(notification?.payload.notificationID)")
+            //print("Received Notification - \(notification?.payload.notificationID)")
         }, handleNotificationAction: { (result) in
             
             let payload: OSNotificationPayload? = result?.notification.payload
             
-            var fullMessage: String? = payload?.body
+            //var fullMessage: String? = payload?.body
             if payload?.additionalData != nil {
                 var additionalData: [AnyHashable: Any]? = payload?.additionalData
-                if additionalData!["actionSelected"] != nil {
-                    fullMessage = fullMessage! + "\nPressed ButtonId:\(additionalData!["actionSelected"])"
+                let type = additionalData!["type"] as? String
+                let senderId = additionalData!["uid"] as? String
+                let senderName = additionalData!["name"] as? String
+                if  type != nil {
+                    if userDefaults.string(forKey: "userid") != nil {
+                        if userDefaults.bool(forKey: "isAdmin") || isAdmin {
+                            self.window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "AdminHomeViewController")
+                            if type == "chat" {
+                                
+                                if let chatVc: MessageViewController = storyboard.instantiateViewController(withIdentifier: "MessageViewController") as? MessageViewController {
+                                    if let window = self.window, let rootViewController = window.rootViewController {
+                                        var currentController = rootViewController
+                                        while let presentedController = currentController.presentedViewController {
+                                            currentController = presentedController
+                                        }
+                                        let channel:Channel = Channel(id: senderId!, name: senderName!)
+                                        chatVc.channel = channel
+                                        chatVc.channelRef = self.channelRef.child(senderId!)
+                                        chatVc.isPushed = true
+                                        currentController.present(chatVc, animated: true, completion: nil)
+                                    }
+                                }
+                            } else {
+                                
+                                if let chatVc: NotificationContainerViewController = storyboard.instantiateViewController(withIdentifier: "NotificationContainerViewController") as? NotificationContainerViewController {
+                                    if let window = self.window, let rootViewController = window.rootViewController {
+                                        var currentController = rootViewController
+                                        while let presentedController = currentController.presentedViewController {
+                                            currentController = presentedController
+                                        }
+                                        chatVc.isPushed = true
+                                        currentController.present(chatVc, animated: true, completion: nil)
+                                    }
+                                }
+                            }
+                        } else {
+                            self.window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "UserHomeViewController")
+                            if type == "chat" {
+                                
+                                if let chatVc: MessageViewController = storyboard.instantiateViewController(withIdentifier: "MessageViewController") as? MessageViewController {
+                                    if let window = self.window, let rootViewController = window.rootViewController {
+                                        var currentController = rootViewController
+                                        while let presentedController = currentController.presentedViewController {
+                                            currentController = presentedController
+                                        }
+                                        chatVc.isPushed = true
+                                        currentController.present(chatVc, animated: true, completion: nil)
+                                    }
+                                }
+                            } else {
+                                if let chatVc: NotificationContainerViewController = storyboard.instantiateViewController(withIdentifier: "NotificationContainerViewController") as? NotificationContainerViewController {
+                                    if let window = self.window, let rootViewController = window.rootViewController {
+                                        var currentController = rootViewController
+                                        while let presentedController = currentController.presentedViewController {
+                                            currentController = presentedController
+                                        }
+                                        chatVc.isPushed = true
+                                        currentController.present(chatVc, animated: true, completion: nil)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    
+                    //fullMessage = fullMessage! + "\nPressed ButtonId:\(additionalData!["actionSelected"])"
                 }
             }
             
-            print(fullMessage ?? "")
+            //print(fullMessage ?? "")
 
         }, settings: [kOSSettingsKeyAutoPrompt : true, kOSSettingsKeyInAppAlerts : false])
         
@@ -108,9 +185,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
         })
         
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main);
-        
-        let userDefaults = UserDefaults.standard
         if userDefaults.string(forKey: "userid") != nil {
             if userDefaults.bool(forKey: "isAdmin") || isAdmin {
                 self.window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "AdminHomeViewController");
@@ -124,7 +198,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         return true
     }
-
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

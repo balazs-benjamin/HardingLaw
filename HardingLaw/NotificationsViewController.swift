@@ -37,6 +37,7 @@ final class NotificationsViewController: JSQMessagesViewController {
     private var userOneSignalIds : [String] = []
     
     private let IamAdmin = UserDefaults.standard.bool(forKey: "isAdmin")
+    let timestampFormatter = JSQMessagesTimestampFormatter()
     
     var channel: Channel? {
         didSet {
@@ -69,7 +70,7 @@ final class NotificationsViewController: JSQMessagesViewController {
             }
             
             if self.IamAdmin {
-                if !isAdmin{
+                if !isAdmin && oneSignalId != ""{
                     self.userOneSignalIds.append(oneSignalId)
                 }
             }
@@ -123,10 +124,8 @@ final class NotificationsViewController: JSQMessagesViewController {
         
       
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "hh:mm:ss a"
-        
-        return NSAttributedString(string: "\(formatter.string(from: Date()))")
+        let message = self.messages[indexPath.item]
+        return self.timestampFormatter.attributedTimestamp(for: message.date)
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
@@ -162,16 +161,11 @@ final class NotificationsViewController: JSQMessagesViewController {
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView?, attributedTextForMessageBubbleTopLabelAt indexPath: IndexPath!) -> NSAttributedString? {
         let message = messages[indexPath.item]
-        switch message.senderId {
-        case senderId:
+        guard let senderDisplayName = message.senderDisplayName else {
+            assertionFailure()
             return nil
-        default:
-            guard let senderDisplayName = message.senderDisplayName else {
-                assertionFailure()
-                return nil
-            }
-            return NSAttributedString(string: senderDisplayName)
         }
+        return NSAttributedString(string: senderDisplayName)
     }
     
     // MARK: Firebase related methods
@@ -186,11 +180,25 @@ final class NotificationsViewController: JSQMessagesViewController {
             let messageData = snapshot.value as! Dictionary<String, String>
             
             if let id = messageData["senderId"] as String!, let name = messageData["senderName"] as String!, let text = messageData["text"] as String!, text.characters.count > 0 {
-                self.addMessage(withId: id, name: name, text: text)
+                if let dateString = messageData["createdAt"] {
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                    let date = dateFormatter.date(from: dateString)!
+                    self.addMessage(withId: id, name: name, date:date, text: text)
+                } else {
+                    self.addMessage(withId: id, name: name, text: text)
+                }
                 self.finishReceivingMessage()
             } else if let id = messageData["senderId"] as String!, let photoURL = messageData["photoURL"] as String! {
                 if let mediaItem = JSQPhotoMediaItem(maskAsOutgoing: id == self.senderId) {
-                    self.addPhotoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
+                    if let dateString = messageData["createdAt"] {
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                        let date = dateFormatter.date(from: dateString)!
+                        self.addPhotoMessage(withId: id, key: snapshot.key, date:date, mediaItem: mediaItem)
+                    } else {
+                        self.addPhotoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
+                    }
                     
                     if photoURL.hasPrefix("gs://") {
                         self.fetchImageDataAtURL(photoURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: nil)
@@ -290,11 +298,16 @@ final class NotificationsViewController: JSQMessagesViewController {
         // 1
         let itemRef = messageRef.childByAutoId()
         
+        let now = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
         // 2
         let messageItem = [
             "senderId": senderId!,
             "senderName": senderDisplayName!,
             "text": text!,
+            "createdAt": dateFormatter.string(from: now)
             ] as [String : Any]
         
         // 3
@@ -313,9 +326,14 @@ final class NotificationsViewController: JSQMessagesViewController {
     func sendPhotoMessage() -> String? {
         let itemRef = messageRef.childByAutoId()
         
+        let now = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
         let messageItem = [
             "photoURL": imageURLNotSetKey,
             "senderId": senderId!,
+            "createdAt": dateFormatter.string(from: now)
             ]
         
         itemRef.setValue(messageItem)
@@ -363,8 +381,26 @@ final class NotificationsViewController: JSQMessagesViewController {
         }
     }
     
+    private func addMessage(withId id: String, name: String, date:Date!, text: String) {
+        if let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, text: text) {
+            messages.append(message)
+        }
+    }
+    
     private func addPhotoMessage(withId id: String, key: String, mediaItem: JSQPhotoMediaItem) {
         if let message = JSQMessage(senderId: id, displayName: "", media: mediaItem) {
+            messages.append(message)
+            
+            if (mediaItem.image == nil) {
+                photoMessageMap[key] = mediaItem
+            }
+            
+            collectionView.reloadData()
+        }
+    }
+    
+    private func addPhotoMessage(withId id: String, key: String, date:Date!, mediaItem: JSQPhotoMediaItem) {
+        if let message = JSQMessage(senderId: id, senderDisplayName: "", date:date, media: mediaItem) {
             messages.append(message)
             
             if (mediaItem.image == nil) {

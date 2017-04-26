@@ -34,7 +34,9 @@ final class ChatViewController: JSQMessagesViewController {
     
     private var localTyping = false
     
-    private var userOneSignalId: String = ""
+    private var userOneSignalIds : [String] = []
+    
+    let timestampFormatter = JSQMessagesTimestampFormatter()
     
     var channel: Channel? {
         didSet {
@@ -70,10 +72,10 @@ final class ChatViewController: JSQMessagesViewController {
             let IamAdmin = UserDefaults.standard.bool(forKey: "isAdmin")
             if IamAdmin {
                 if userid == self.channel?.id {
-                    self.userOneSignalId = oneSignalId;
+                    self.userOneSignalIds.append(oneSignalId);
                 }
             } else if isAdmin{
-                self.userOneSignalId = oneSignalId;
+                self.userOneSignalIds.append(oneSignalId);
             }
         })
     }
@@ -118,14 +120,15 @@ final class ChatViewController: JSQMessagesViewController {
         return kJSQMessagesCollectionViewCellLabelHeightDefault
     }
         
-      
+
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "hh:mm:ss a"
-        
-        return NSAttributedString(string: "\(formatter.string(from: Date()))")
+        let message = self.messages[indexPath.item]
+        if (indexPath.item % 3 == 0) {
+            return self.timestampFormatter.attributedTimestamp(for: message.date)
+        }
+        return nil;
     }
-    
+  
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
         let message = messages[indexPath.item] // 1
         if message.senderId == senderId { // 2
@@ -159,16 +162,11 @@ final class ChatViewController: JSQMessagesViewController {
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView?, attributedTextForMessageBubbleTopLabelAt indexPath: IndexPath!) -> NSAttributedString? {
         let message = messages[indexPath.item]
-        switch message.senderId {
-        case senderId:
+        guard let senderDisplayName = message.senderDisplayName else {
+            assertionFailure()
             return nil
-        default:
-            guard let senderDisplayName = message.senderDisplayName else {
-                assertionFailure()
-                return nil
-            }
-            return NSAttributedString(string: senderDisplayName)
         }
+        return NSAttributedString(string: senderDisplayName)
     }
     
     // MARK: Firebase related methods
@@ -183,11 +181,25 @@ final class ChatViewController: JSQMessagesViewController {
             let messageData = snapshot.value as! Dictionary<String, String>
             
             if let id = messageData["senderId"] as String!, let name = messageData["senderName"] as String!, let text = messageData["text"] as String!, text.characters.count > 0 {
-                self.addMessage(withId: id, name: name, text: text)
+                if let dateString = messageData["createdAt"] {
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                    let date = dateFormatter.date(from: dateString)!
+                    self.addMessage(withId: id, name: name, date:date, text: text)
+                } else {
+                    self.addMessage(withId: id, name: name, text: text)
+                }
                 self.finishReceivingMessage()
             } else if let id = messageData["senderId"] as String!, let photoURL = messageData["photoURL"] as String! {
                 if let mediaItem = JSQPhotoMediaItem(maskAsOutgoing: id == self.senderId) {
-                    self.addPhotoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
+                    if let dateString = messageData["createdAt"] {
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                        let date = dateFormatter.date(from: dateString)!
+                        self.addPhotoMessage(withId: id, key: snapshot.key, date:date, mediaItem: mediaItem)
+                    } else {
+                        self.addPhotoMessage(withId: id, key: snapshot.key, mediaItem: mediaItem)
+                    }
                     
                     if photoURL.hasPrefix("gs://") {
                         self.fetchImageDataAtURL(photoURL, forMediaItem: mediaItem, clearsPhotoMessageMapOnSuccessForKey: nil)
@@ -264,40 +276,41 @@ final class ChatViewController: JSQMessagesViewController {
     }
     
     func sendPush(withMessage text: String) {
-        let userId = self.userOneSignalId
-        if userId != "" {
-            let payload = [
-                "include_player_ids": [self.userOneSignalId],
-                "data": [
-                    "name": FIRAuth.auth()?.currentUser?.displayName ?? "",
-                    "uid": FIRAuth.auth()?.currentUser?.uid ?? "",
-                    "type": "chat" ,
-                ],
-                
-                //"headings": [ "en": "Message from " + (FIRAuth.auth()?.currentUser?.displayName)! ],
-                
-                
-                "ios_badgeType": "Increase",
-                "content-available": 1,
-                "ios_badgeCount": 1,
-                "contents": ["en": (FIRAuth.auth()?.currentUser?.displayName)! + ": \(text)"]
-            ] as [String : Any]
+        let payload = [
+            "include_player_ids": self.userOneSignalIds,
+            "data": [
+                "name": FIRAuth.auth()?.currentUser?.displayName ?? "",
+                "uid": FIRAuth.auth()?.currentUser?.uid ?? "",
+                "type": "chat" ,
+            ],
             
-            OneSignal.postNotification(payload)
-        }
+            //"headings": [ "en": "Message from " + (FIRAuth.auth()?.currentUser?.displayName)! ],
+            
+            
+            "ios_badgeType": "Increase",
+            "content-available": 1,
+            "ios_badgeCount": 1,
+            "contents": ["en": (FIRAuth.auth()?.currentUser?.displayName)! + ": \(text)"]
+            ] as [String : Any]
         
-        
+        OneSignal.postNotification(payload)
     }
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
         // 1
         let itemRef = messageRef.childByAutoId()
         
+        let now = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        
         // 2
         let messageItem = [
             "senderId": senderId!,
             "senderName": senderDisplayName!,
             "text": text!,
+            "createdAt": dateFormatter.string(from: now)
             ] as [String : Any]
         
         // 3
@@ -316,10 +329,15 @@ final class ChatViewController: JSQMessagesViewController {
     func sendPhotoMessage() -> String? {
         let itemRef = messageRef.childByAutoId()
         
+        let now = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
         let messageItem = [
             "photoURL": imageURLNotSetKey,
             "senderId": senderId!,
-            ]
+            "createdAt": dateFormatter.string(from: now)
+        ]
         
         itemRef.setValue(messageItem)
         
@@ -366,8 +384,26 @@ final class ChatViewController: JSQMessagesViewController {
         }
     }
     
+    private func addMessage(withId id: String, name: String, date:Date!, text: String) {
+        if let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, text: text) {
+            messages.append(message)
+        }
+    }
+    
     private func addPhotoMessage(withId id: String, key: String, mediaItem: JSQPhotoMediaItem) {
         if let message = JSQMessage(senderId: id, displayName: "", media: mediaItem) {
+            messages.append(message)
+            
+            if (mediaItem.image == nil) {
+                photoMessageMap[key] = mediaItem
+            }
+            
+            collectionView.reloadData()
+        }
+    }
+    
+    private func addPhotoMessage(withId id: String, key: String, date:Date!, mediaItem: JSQPhotoMediaItem) {
+        if let message = JSQMessage(senderId: id, senderDisplayName: "", date:date, media: mediaItem) {
             messages.append(message)
             
             if (mediaItem.image == nil) {
@@ -398,7 +434,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         
         let postImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         var data = NSData()
-        data = UIImageJPEGRepresentation(postImage!, 0.8)! as NSData
+        data = UIImageJPEGRepresentation(postImage!, 0.5)! as NSData
         let metaData = FIRStorageMetadata()
         metaData.contentType = "image/jpg"
         

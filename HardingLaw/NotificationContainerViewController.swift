@@ -16,6 +16,9 @@ class NotificationContainerViewController: UIViewController {
     var channel: Channel? = nil
     var senderDisplayName: String = ""
     
+    var isPushed = false
+    
+    @IBOutlet weak var btnBack: UIButton!
     @IBOutlet var bottomView:UIView?
     
     @IBOutlet var chatVc:NotificationsViewController!
@@ -27,6 +30,10 @@ class NotificationContainerViewController: UIViewController {
             bottomView?.isHidden = true;
         } else {
             bottomView?.isHidden = false;
+        }
+        
+        if(isPushed) {
+            btnBack.addTarget(self, action: #selector(backPushed), for: .touchUpInside)
         }
     }
     
@@ -43,7 +50,7 @@ class NotificationContainerViewController: UIViewController {
             channelRef = FIRDatabase.database().reference().child("notifications")
             chatVc.channelRef = channelRef
             
-            senderDisplayName = "Attorney"
+            senderDisplayName = chatVc.senderDisplayName
             chatVc.senderDisplayName = senderDisplayName
         }
     }
@@ -58,4 +65,10 @@ class NotificationContainerViewController: UIViewController {
     @IBAction func back() {
         _ = navigationController?.popViewController(animated: true)
     }
+    
+    
+    @IBAction func backPushed() {
+        self.dismiss(animated: true, completion: nil)
+    }
+
 }

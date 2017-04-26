@@ -537,17 +537,17 @@ class NewInjuryViewController: UIViewController, UITextFieldDelegate, UINavigati
         strReport += "<b>-Injured Information</b><br><br>"
         strReport += "<b>Injured 1 Name:</b><br>" + self.injuredName1.text! + "<br>"
         strReport += "<b>Injured 1 Phone Number:</b><br>" + self.injuredPhone1.text! + "<br>"
-        strReport += "<b>Injured 1 Photo*:</b><br>" + injuredPhoto1 + "<br>"
+        strReport += "<b>Injured 1 Photo:</b><br>" + injuredPhoto1 + "<br>"
         
         strReport += "<b>Injured 2 Name:</b><br>" + self.injuredName2.text! + "<br>"
         strReport += "<b>Injured 2 Phone Number:</b><br>" + self.injuredPhone2.text! + "<br>"
-        strReport += "<b>Injured 2 Photo*:</b><br>" + injuredPhoto2 + "<br>"
+        strReport += "<b>Injured 2 Photo:</b><br>" + injuredPhoto2 + "<br>"
         
         strReport += "<b>-Police Information</b><br><br>"
         strReport += "<b>Police Name:</b><br>" + self.policeName.text! + "<br>"
         strReport += "<b>Police Number:</b><br>" + self.policeNumber.text! + "<br>"
         strReport += "<b>Police Report Number:</b><br>" + self.policeReportNumber.text! + "<br>"
-        strReport += "<b>Police Photo*:</b><br>" + policePhoto + "<br>"
+        strReport += "<b>Police Photo:</b><br>" + policePhoto + "<br>"
         
         
         
@@ -627,7 +627,7 @@ class NewInjuryViewController: UIViewController, UITextFieldDelegate, UINavigati
         // Dismiss the mail compose view controller.
         controller.dismiss(animated: true, completion: nil)
         
-        FIRAnalytics.logEvent(withName: "New Accident Report Sent", parameters: [
+        FIRAnalytics.logEvent(withName: "accident_report_sent", parameters: [
             "name": "New Accident Report Sent" as NSObject,
             "full_text": "User sent New Accident Report" as NSObject
             ])

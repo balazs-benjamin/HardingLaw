@@ -16,10 +16,19 @@ class MessageViewController: UIViewController {
     var channel: Channel? = nil
     var senderDisplayName: String = ""
     
+    
+    var isPushed = false
+    
+    @IBOutlet weak var btnBack: UIButton!
     @IBOutlet var chatVc:ChatViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        if(isPushed) {
+            btnBack.addTarget(self, action: #selector(backPushed), for: .touchUpInside)
+        }
         
     }
     
@@ -32,16 +41,16 @@ class MessageViewController: UIViewController {
             
             let userDefaults = UserDefaults.standard
             let strChannelID = userDefaults.string(forKey: "channel")
+            let sender_name = userDefaults.string(forKey: "user_name")
             
             if channel == nil {
                 channel = Channel(id: strChannelID!, name: (FIRAuth.auth()?.currentUser?.displayName)!)
                 channelRef = FIRDatabase.database().reference().child("channels")
-                senderDisplayName = (FIRAuth.auth()?.currentUser?.displayName)!
+                senderDisplayName = sender_name!
 
                 chatVc.channelRef = channelRef.child((channel?.id)!)
             } else {
                 chatVc.channelRef = self.channelRef
-                senderDisplayName = "Attorney"
             }
             
             chatVc.channel = channel
@@ -58,5 +67,9 @@ class MessageViewController: UIViewController {
     
     @IBAction func back() {
         _ = navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func backPushed() {
+        self.dismiss(animated: true, completion: nil)
     }
 }
