@@ -516,7 +516,7 @@
                 <navigationController navigationBarHidden="YES" id="dJg-IL-Z4Y" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="icn_home.png" id="fOD-uV-ZwL"/>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="DMW-90-DXk">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DMW-90-DXk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -724,7 +724,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="97v-ZA-Mb8" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="About Us" image="icn_about_us.png" id="4mJ-Ku-Th0"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="chG-UB-HCP">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="chG-UB-HCP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -832,7 +832,7 @@
         <scene sceneID="SLK-wz-zoz">
             <objects>
                 <navigationController navigationBarHidden="YES" id="zcJ-je-eIk" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cDV-WU-HkK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cDV-WU-HkK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1135,9 +1135,9 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ax-yp-Gv2">
-                                                <rect key="frame" x="212" y="332" width="118" height="33.000000000000057"/>
+                                                <rect key="frame" x="212" y="332" width="111" height="33.000000000000057"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <state key="normal" title="1800 878 7888">
+                                                <state key="normal" title="800 878 7888">
                                                     <color key="titleColor" red="0.99073106050491333" green="0.99621599912643433" blue="0.99195295572280884" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
@@ -1288,7 +1288,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="414" height="300"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0e1-zy-EeJ" id="QMB-WG-xNz">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="299"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="299.66666666666669"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="videoTitle" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kUR-j0-Yje">
@@ -2227,7 +2227,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="U7l-qR-6Tv" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Contact Us" image="icn_contacts.png" id="hgg-5p-e8K"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="WOE-Pz-eac">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WOE-Pz-eac">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2244,7 +2244,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="cRD-g0-jqN" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Share" image="icn_share.png" id="9yC-kF-2DQ"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="RFp-Uo-zHI">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RFp-Uo-zHI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2481,7 +2481,7 @@
             <objects>
                 <navigationController storyboardIdentifier="AdminHomeViewController" navigationBarHidden="YES" id="7Zh-55-yqR" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Messages" image="icn_message.png" id="IpI-l0-QWP"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="pgr-II-3JW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pgr-II-3JW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2557,7 +2557,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="07t-gC-ni2" id="PZn-fn-WCE">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqn-Jt-JJ6">
@@ -3106,7 +3106,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="1fa-L9-emq" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Media" image="icn_media.png" id="hkn-J4-Tbk"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="XIH-Lp-CWf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XIH-Lp-CWf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

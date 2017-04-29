@@ -44,14 +44,14 @@ class ContactUsController: UIViewController, MFMailComposeViewControllerDelegate
     }
     
     @IBAction func callPhil() {
-        if let url = URL(string: "tel://13037629500") , UIApplication.shared.canOpenURL(url) {
-            open(scheme:"tel://13037629500")
+        if let url = URL(string: "tel://3037629500") , UIApplication.shared.canOpenURL(url) {
+            open(scheme:"tel://3037629500")
         }
     }
     
     @IBAction func callPhil2() {
-        if let url = URL(string: "tel://18008787888") , UIApplication.shared.canOpenURL(url) {
-            open(scheme:"tel://18008787888")
+        if let url = URL(string: "tel://8008787888") , UIApplication.shared.canOpenURL(url) {
+            open(scheme:"tel://8008787888")
         }
     }
     

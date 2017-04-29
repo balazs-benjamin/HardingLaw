@@ -279,8 +279,8 @@ final class ChatViewController: JSQMessagesViewController {
         let payload = [
             "include_player_ids": self.userOneSignalIds,
             "data": [
-                "name": FIRAuth.auth()?.currentUser?.displayName ?? "",
-                "uid": FIRAuth.auth()?.currentUser?.uid ?? "",
+                "name": senderDisplayName!,
+                "uid": senderId!,
                 "type": "chat" ,
             ],
             

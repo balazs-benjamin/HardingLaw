@@ -74,6 +74,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 userDefaults.set(userID, forKey: "channel")
                 userDefaults.set(userName, forKey: "user_name")
                 
+                
+                let changeRequest = FIRAuth.auth()?.currentUser?.profileChangeRequest()
+                changeRequest?.displayName = userName
+                changeRequest?.commitChanges { error in
+                    if error != nil {
+                        // An error happened.
+                    } else {
+                        // Profile updated.
+                    }
+                }
+                
                 FIRAnalytics.logEvent(withName: "app_opened", parameters: [
                     "name": "App Opend" as NSObject,
                     "full_text": "User id: \(userID)" as NSObject

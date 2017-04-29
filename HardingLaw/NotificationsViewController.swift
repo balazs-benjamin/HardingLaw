@@ -278,16 +278,15 @@ final class NotificationsViewController: JSQMessagesViewController {
         let payload = [
             "include_player_ids": self.userOneSignalIds,
             "data": [
-                "name": FIRAuth.auth()?.currentUser?.displayName,
-                "uid": FIRAuth.auth()?.currentUser?.uid,
-                "type": "notification" ],
-            
+                "name": senderDisplayName!,
+                "uid": senderId!,
+                "type": "notification" ],          
             
             "ios_badgeType": "Increase",
             "content-available": 1,
             "ios_badgeCount": 1,
             //"headings": [ "en": "Message from " + (FIRAuth.auth()?.currentUser?.displayName)! ],
-            "contents": ["en": (FIRAuth.auth()?.currentUser?.displayName)! + ": \(text)"],
+            "contents": ["en": "\(text)"],
             ] as [String : Any]
         
         OneSignal.postNotification(payload);
